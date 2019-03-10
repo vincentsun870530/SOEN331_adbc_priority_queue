@@ -1,31 +1,17 @@
 package soen331adbc;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
-
 import be.ac.ua.ansymo.adbc.annotations.requires;
 
-public class PriorityQueue<E> {
+public interface PriorityQueue<T> {
 
-	public E remove(Object o) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//Inserts the pair (el ; key) into the priority queue.
+	public void insert(T e, int key);
 	
-	@requires ({ "E != null",
-		"$this.isFull() == false"
-		})
+	//Removes and returns the element with the smallest key.
+	public T remove();
 	
-	public boolean add(E e) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	// Returns but does not remove the element with the smallest key.
+	public T min();
 
-
-	public E min() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
