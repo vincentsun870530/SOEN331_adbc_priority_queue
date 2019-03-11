@@ -1,23 +1,35 @@
-//Reference:http://www.algolist.net/Data_structures/Binary_heap/Remove_minimum
+//adbc reference: https://users.encs.concordia.ca/~cc/soen331/material/lectures/adbc.pdf
+//PQ reference:http://www.algolist.net/Data_structures/Binary_heap/Remove_minimum
 package soen331adbc;
 
 import java.util.ArrayList;
 
+import be.ac.ua.ansymo.adbc.annotations.ensures;
+import be.ac.ua.ansymo.adbc.annotations.invariant;
+import be.ac.ua.ansymo.adbc.annotations.requires;
 
+
+@invariant ({ "$this.top >= -1",
+	"$this.capacity > 0",
+	"$this.top <= $this.capacity"
+	})
 public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 	
 	//1) Shape Property: A binary heap is a complete binary tree, this means all of the levels of the tree are completely filled except possibly the last level. The nodes are filled from left to right.
 	//2) Heap Property: The value stored in each node is either (greater than or equal to) OR (less than or equal to ) it¡¯s children depending if it is a max heap or a min heap.
 	//3) Using Williams Method of building a heap
 	
-	public ArrayList<boundedObject>collection;
-	int capacity;
-	int top;
 	
+	
+	public ArrayList<boundedObject>collection;
+	public int capacity;
+	public int top = -1;
+	
+	@requires ({"capacity > 0"})
+	//@ensures ({"$this.collection != null" })
 	public BoundedPriorityQueue (int capacity) {
 		this.capacity = capacity;
 		this.collection = new ArrayList<boundedObject>(capacity);
-		this.top = -1;
 		}
 	
 	
@@ -31,6 +43,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 			while (child > parent) 
 			swap(parent, child); 
 	 */
+	
 	@Override
 	public void insert(T t, int key) {
 		if(top ==-1) {

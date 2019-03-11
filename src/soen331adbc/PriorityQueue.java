@@ -1,8 +1,7 @@
 package soen331adbc;
 
-import be.ac.ua.ansymo.adbc.annotations.requires;
-
 public interface PriorityQueue<T> {
+
 
 	//Inserts the pair (el ; key) into the priority queue.
 	public void insert(T e, int key);
