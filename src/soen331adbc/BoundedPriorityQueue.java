@@ -9,6 +9,7 @@ import be.ac.ua.ansymo.adbc.annotations.invariant;
 import be.ac.ua.ansymo.adbc.annotations.requires;
 
 
+
 @invariant ({ "$this.top >= -1",
 	"$this.capacity > 0",
 	"$this.top <= $this.capacity"
@@ -26,7 +27,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 	public int top = -1;
 	
 	@requires ({"capacity > 0"})
-	//@ensures ({"$this.collection != null" })
+	@ensures ({"$this.collection != null" })
 	public BoundedPriorityQueue (int capacity) {
 		this.capacity = capacity;
 		this.collection = new ArrayList<boundedObject>(capacity);
@@ -43,21 +44,53 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 			while (child > parent) 
 			swap(parent, child); 
 	 */
-	
+	@requires	({
+		"t != null",
+		"key > 0 ",
+		"$this.isFull() == false"
+			})
 	@Override
 	public void insert(T t, int key) {
+			boundedObject bd = new boundedObject(t,key);
+			inserthelp(bd);
+		}
+	
+	@ensures({
+		"$this.collection.contains(bd)",
+		"$this.isMin() ==true", 
+		"$this.getSize() == $old($this.getSize()) + 1"		
+	})
+	//dummy help function for adbc test
+	public void inserthelp(boundedObject bd) {
 		if(top ==-1) {
-			collection.add(new boundedObject(t,key));
-			top++;
+			collection.add(++top,bd);
 		}
 		else{
-			collection.add(new boundedObject(t,key));
-			top++;
+			collection.add(++top,bd);
 			swapInsert(top);							
 		}
-	}
-
+		
+	};
 	
+	public boolean isFull() {		
+		return this.getSize() == this.getCapacity();		
+	}
+	
+	public boolean isMin() {
+		boolean temp = false;
+		for(boundedObject bd : collection) {
+			if(collection.get(0).getKey()<=bd.getKey()) {
+				temp = true;
+			}
+		}
+		return temp;
+	}
+	
+	@requires({"true"})
+	@ensures({"$result > 0"})
+	public int getSize() {
+		return top + 1;
+	}
 	
 	//Removes and returns the element with the smallest key.
 	@Override
@@ -162,6 +195,8 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 		this.collection = collection;
 	}
 
+	@requires({"true"})
+	@ensures({"$result > 0"})
 	private int getCapacity() {
 		return capacity;
 	}
@@ -170,6 +205,8 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 		this.capacity = capacity;
 	}
 
+	@requires({"true"})
+	@ensures({"$result > 0"})
 	private int getTop() {
 		return top;
 	}
