@@ -67,8 +67,10 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 		}
 
 	
-
-	
+    //@requires ({"true"})
+	public boolean isEmpty() {
+		return this.collection.isEmpty();
+	}
 
 	
 
@@ -101,7 +103,6 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 			})
 
 	@Override
-
 	public void insert(T t, int key) {
 
 			boundedObject bd = new boundedObject(t,key);
@@ -122,8 +123,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	})
 
-	//dummy help function for adbc test
-
+	//helper function for adbc test
 	public void inserthelp(boundedObject bd) {
 
 		if(top ==-1) {
@@ -144,8 +144,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	};
 
-	
-
+	//@requires({"true"})
 	public boolean isFull() {		
 
 		return this.getSize() == this.getCapacity();		
@@ -153,7 +152,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 	}
 
 	
-
+	//@requires({"true"})
 	public boolean isMin() {
 
 		boolean temp = false;
@@ -189,18 +188,25 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 	//Removes and returns the element with the smallest key.
 
 	@Override
-
+	@requires ({"$this.isEmpty() == false"})
+	@ensures ({
+	"$this != null",
+	"$this.isMin()==true",
+	"$this.getSize() == $old($this.getSize()) - 1"
+	})
 	public T remove() {
-
-		if(collection.isEmpty()) {
-
-			System.out.println("Heap is empty");
-
-			return null;
-
-		}
-
-		else 
+		//Todo maybe need remove if condition catch by contractor
+		/*
+		 * if(collection.isEmpty()) {
+		 * 
+		 * System.out.println("Heap is empty");
+		 * 
+		 * return null;
+		 * 
+		 * }
+		 * 
+		 * else
+		 */
 
 		{
 
@@ -217,7 +223,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 		top--;
 
 		// siftDown
-
+		// need to remove condition
 		if(collection.size()>1) {
 
 		siftDown(0);
@@ -310,6 +316,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	@Override
 
+	@requires ({"$this.isEmpty() == false"})
 	public T min() {
 
 		return (T) collection.get(0).getT();
@@ -370,11 +377,11 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 
 
-	public ArrayList<boundedObject> getCollection() {
-
-		return collection;
-
-	}
+//	public ArrayList<boundedObject> getCollection() {
+//
+//		return collection;
+//
+//	}
 
 
 
