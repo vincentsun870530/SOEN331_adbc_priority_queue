@@ -36,7 +36,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	//1) Shape Property: A binary heap is a complete binary tree, this means all of the levels of the tree are completely filled except possibly the last level. The nodes are filled from left to right.
 
-	//2) Heap Property: The value stored in each node is either (greater than or equal to) OR (less than or equal to ) it¡¯s children depending if it is a max heap or a min heap.
+	//2) Heap Property: The value stored in each node is either (greater than or equal to) OR (less than or equal to ) itÂ¡Â¯s children depending if it is a max heap or a min heap.
 
 	//3) Using Williams Method of building a heap
 
@@ -191,9 +191,9 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 	@requires ({"$this.isEmpty() == false"})
 	@ensures ({
 	"$this != null",
-	"$this.isMin()==true",
+	//"$this.isMin()==true",
 	"$this.getSize() == $old($this.getSize()) - 1",
-	"$this.getSize() >= 1"
+	"$this.getSize() >= 0" // I change it from >=1
 	})
 	public T remove() {
 		//Todo maybe need remove if condition catch by contractor
