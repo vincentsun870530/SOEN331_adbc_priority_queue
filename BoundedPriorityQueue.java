@@ -92,7 +92,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	 */
 
-	@requires	({
+	@requires	({   //this one is for insert
 
 		"t != null",
 
@@ -113,7 +113,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	
 
-	@ensures({
+	@ensures({         //this on is for insert help
 
 		"$this.collection.contains(bd)",
 
@@ -123,7 +123,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	})
 
-	//helper function for adbc test
+	//helper function for adbc test    //I don't think it can be done by adbc since it has an else condition
 	public void inserthelp(boundedObject bd) {
 
 		if(top ==-1) {
@@ -192,7 +192,8 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 	@ensures ({
 	"$this != null",
 	"$this.isMin()==true",
-	"$this.getSize() == $old($this.getSize()) - 1"
+	"$this.getSize() == $old($this.getSize()) - 1",
+	"$this.getSize() >= 1"
 	})
 	public T remove() {
 		//Todo maybe need remove if condition catch by contractor
@@ -223,12 +224,12 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 		top--;
 
 		// siftDown
-		// need to remove condition
-		if(collection.size()>1) {
+		// need to remove condition      an update, done!
+//		if(collection.size()>1) {
 
 		siftDown(0);
 
-		}
+//		}
 
 		return tempT;
 
@@ -238,7 +239,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	
 
-	//Help method to Heapify the heap
+	//Helper method to Heapify the heap
 
 	public void siftDown(int index) {
 
@@ -265,9 +266,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 			}
 
 		}
-
-
-
+            
 		else {
 
 			if(collection.get(leftChildIndex).getKey()<=collection.get(rightChildIndex).getKey()) {
@@ -366,7 +365,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 	
 
 
-	@requires ({"$this.getTop()>-1" })
+	@requires ({"$this.getTop()>-1" })  // can the size be -1?
 	public void printQueue() {		
 
 		for(boundedObject bo : collection) {
