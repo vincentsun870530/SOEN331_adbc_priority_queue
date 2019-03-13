@@ -10,5 +10,5 @@ Language compiler: JVM. version "1.8.0_201"
 How to configure tools: Getting started with adbc in Java/AspectJ under Eclipse from cc's website: 
 https://users.encs.concordia.ca/~cc/soen331/
 
-How to run the code: After following the instructions above, rue the code from driver: text.java. 
+How to run the code: After following the instructions above, run the code from driver: text.java. 
 For simulating assertion failures, run simulating.java.
