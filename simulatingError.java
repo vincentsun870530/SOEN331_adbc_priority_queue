@@ -1,5 +1,5 @@
 package soen331adbc;
-
+//comment out these bp objects to simulating errors
 public class simulatingError {
 
 	public static void main(String[] arg) {
@@ -31,17 +31,26 @@ public class simulatingError {
 //	    bp.getSize();
 	    //size not > 0 since its empty
 		
-//		BoundedPriorityQueue <String> bp = new BoundedPriorityQueue(0);
+//		BoundedPrioritsyQueue <String> bp = new BoundedPriorityQueue(0);
 //	    bp.getCapacity();
 	    //will stop at the precondition that says capacity cant be 0 so no need for a contract on getcapacity?
 
 		
-		//this is a good condition that indicates $result should be > -1
+//		BoundedPriorityQueue <String> bp = new BoundedPriorityQueue(1);
+//	    bp.getTop();  
+//	    // result should be > -1
+		
+		
+		
+		
+		
+		//this is a good condition which indicates that $result should be > -1
 //	    BoundedPriorityQueue <String> bp = new BoundedPriorityQueue(1);
 //	    bp.insert("A", 1);
 //	    System.out.println(bp.getTop());
 	    
-	   
+		
+
 	    
 
 	}

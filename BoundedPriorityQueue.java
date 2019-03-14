@@ -1,13 +1,11 @@
 //adbc reference: https://users.encs.concordia.ca/~cc/soen331/material/lectures/adbc.pdf
-
+ 
 //PQ reference:http://www.algolist.net/Data_structures/Binary_heap/Remove_minimum
 
 package soen331adbc;
 
 
-
 import java.util.ArrayList;
-
 
 
 import be.ac.ua.ansymo.adbc.annotations.ensures;
@@ -15,9 +13,6 @@ import be.ac.ua.ansymo.adbc.annotations.ensures;
 import be.ac.ua.ansymo.adbc.annotations.invariant;
 
 import be.ac.ua.ansymo.adbc.annotations.requires;
-
-
-
 
 
 
@@ -36,13 +31,9 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	//1) Shape Property: A binary heap is a complete binary tree, this means all of the levels of the tree are completely filled except possibly the last level. The nodes are filled from left to right.
 
-	//2) Heap Property: The value stored in each node is either (greater than or equal to) OR (less than or equal to ) itÂ¡Â¯s children depending if it is a max heap or a min heap.
+	//2) Heap Property: The value stored in each node is either (greater than or equal to) OR (less than or equal to ) it¡¯s children depending if it is a max heap or a min heap.
 
 	//3) Using Williams Method of building a heap
-
-	
-
-	
 
 	
 
@@ -123,7 +114,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	})
 
-	//helper function for adbc test    //I don't think it can be done by adbc since it has an else condition
+	//helper function for adbc test 
 	public void inserthelp(boundedObject bd) {
 
 		if(top ==-1) {
@@ -193,7 +184,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 	"$this != null",
 	//"$this.isMin()==true",
 	"$this.getSize() == $old($this.getSize()) - 1",
-	"$this.getSize() >= 0" // I change it from >=1
+	"$this.getSize() >= 0"    // I change it from >=1
 	})
 	public T remove() {
 		//Todo maybe need remove if condition catch by contractor
@@ -414,7 +405,7 @@ public class BoundedPriorityQueue <T> implements PriorityQueue<T> {
 
 	@requires({"true"})
 
-	@ensures({"$result > 0"})
+	@ensures({"$result > -1"})
 
 	public int getTop() {
 
